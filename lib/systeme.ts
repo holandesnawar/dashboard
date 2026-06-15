@@ -120,3 +120,16 @@ export function countByTag(leads: Lead[]): Record<string, number> {
   }
   return out;
 }
+
+/** Recuento por valor de un campo (p.ej. 'cmo_conociste_nawar', 'nivel_de_neerlands'),
+ *  ordenado de mayor a menor. */
+export function countByField(leads: Lead[], slug: string): { value: string; count: number }[] {
+  const out: Record<string, number> = {};
+  for (const l of leads) {
+    const v = (l.fields[slug] ?? '').trim() || 'Sin especificar';
+    out[v] = (out[v] ?? 0) + 1;
+  }
+  return Object.entries(out)
+    .map(([value, count]) => ({ value, count }))
+    .sort((a, b) => b.count - a.count);
+}

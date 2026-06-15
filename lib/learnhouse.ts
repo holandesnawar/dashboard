@@ -12,7 +12,20 @@ export type AcademiaOverview = {
     abandoned: number;
     paid_last_30d: number;
     new_last_7d: number;
+    carts_abandoned_24h: number;
     conversion_rate_pct: number;
+  };
+  funnel: {
+    matriculas: number;
+    pagadas: number;
+    conversion_matricula_pago_pct: number;
+  };
+  activation: {
+    paid: number;
+    created_account: number;
+    onboarding_started: number;
+    started_course: number;
+    activation_rate_pct: number;
   };
   students: {
     total: number;
@@ -27,6 +40,16 @@ export type AcademiaOverview = {
     completions_total: number;
     completions_last_7d: number;
     time_hours: number;
+  };
+  content: {
+    modules: { module_id: string; title: string; completions: number; students: number; time_hours: number }[];
+    top_lessons: { lesson_id: string; completions: number }[];
+    exercise_sections: { section: string; label: string; attempts: number; avg_score_pct: number }[];
+    weak_words: { label: string; fails: number }[];
+    stuck: {
+      by_module: { label: string; students: number }[];
+      by_lesson: { label: string; students: number }[];
+    };
   };
   users: { total: number; verified: number };
   surveys: { available: boolean; note?: string };

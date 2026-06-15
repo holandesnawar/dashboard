@@ -17,7 +17,7 @@ export default async function AcademiaPage() {
     );
   }
 
-  const { enrollments, students, lessons, users } = res.data;
+  const { enrollments, students, lessons, users, activation } = res.data;
   const stamp = new Date(res.data.generated_at).toLocaleString('es-ES');
 
   return (
@@ -31,6 +31,14 @@ export default async function AcademiaPage() {
         <Kpi label="Abandonadas" value={enrollments.abandoned} />
       </div>
 
+      <div className="section-title">Activación (pagó → empezó)</div>
+      <div className="grid">
+        <Kpi label="Tasa de activación" value={`${activation.activation_rate_pct}%`} sub="De quien paga, empieza" accent />
+        <Kpi label="Crearon cuenta" value={activation.created_account} sub={`de ${activation.paid} pagadas`} />
+        <Kpi label="Empezaron la formación" value={activation.started_course} />
+        <Kpi label="Onboarding iniciado" value={activation.onboarding_started} />
+      </div>
+
       <div className="section-title">Alumnos y actividad</div>
       <div className="grid">
         <Kpi label="Alumnos (total)" value={students.total} accent />
@@ -39,7 +47,6 @@ export default async function AcademiaPage() {
         <Kpi label="Racha más larga" value={`${students.max_streak} días`} />
         <Kpi label="Racha media" value={`${students.avg_streak} días`} />
         <Kpi label="Tiempo total" value={`${students.total_time_hours} h`} sub="Acumulado de alumnos" />
-        <Kpi label="Onboarding iniciado" value={students.onboarding_started} />
       </div>
 
       <div className="section-title">Lecciones</div>

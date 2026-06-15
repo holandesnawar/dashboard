@@ -1,6 +1,7 @@
 import Shell from '@/components/Shell';
 import Kpi from '@/components/Kpi';
-import { countByTag, getLeads } from '@/lib/systeme';
+import BarList from '@/components/BarList';
+import { countByField, countByTag, getLeads } from '@/lib/systeme';
 
 export const dynamic = 'force-dynamic';
 
@@ -29,6 +30,8 @@ export default async function LeadsPage() {
   const tags = countByTag(res.leads);
   const espera = tags['Lista de espera'] ?? 0;
   const sinPagar = tags['Matriculado sin pagar'] ?? 0;
+  const porFuente = countByField(res.leads, 'cmo_conociste_nawar').slice(0, 8);
+  const porNivel = countByField(res.leads, 'nivel_de_neerlands').slice(0, 8);
 
   return (
     <Shell active="/leads" title="Leads" subtitle="Lista de espera y matrículas desde la web principal (systeme.io).">
@@ -37,6 +40,20 @@ export default async function LeadsPage() {
         <Kpi label="Lista de espera" value={espera} sub="En esta muestra" />
         <Kpi label="Matriculado sin pagar" value={sinPagar} sub="Reenganche" />
         <Kpi label="Cargados aquí" value={res.leads.length} sub={res.hasMore ? 'Hay más' : 'Completo'} />
+      </div>
+
+      <div className="two-col" style={{ marginTop: 20 }}>
+        <BarList
+          title="Cómo nos conocieron"
+          rows={porFuente.map((f) => ({ label: f.value, value: f.count }))}
+          empty="Aún sin datos de fuente."
+        />
+        <BarList
+          title="Nivel de neerlandés declarado"
+          alt
+          rows={porNivel.map((f) => ({ label: f.value, value: f.count }))}
+          empty="Aún sin datos de nivel."
+        />
       </div>
 
       <div className="section-title">Últimos leads</div>

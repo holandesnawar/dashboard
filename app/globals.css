@@ -207,6 +207,27 @@ tr:last-child td { border-bottom: none; }
 .error-msg { color: #c0392b; font-size: 13px; margin-top: 10px; }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
+/* ── Barras de distribución ─────────────────────────────────────────────────── */
+.barlist { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; box-shadow: var(--shadow); }
+.barrow { margin: 10px 0; }
+.barrow:first-child { margin-top: 4px; }
+.barrow .top { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px; }
+.barrow .top .n { color: var(--muted); font-weight: 600; }
+.bartrack { height: 8px; background: var(--offwhite); border-radius: 999px; overflow: hidden; }
+.barfill { height: 100%; background: var(--nawar-accent); border-radius: 999px; }
+.barfill.alt { background: var(--nawar-accent-light); }
+
+/* ── Embudo ─────────────────────────────────────────────────────────────────── */
+.funnel { display: flex; flex-direction: column; gap: 8px; max-width: 560px; }
+.funnel-step { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; }
+.funnel-step .left { display: flex; align-items: center; gap: 12px; }
+.funnel-step .bignum { font-family: Poppins, sans-serif; font-weight: 700; font-size: 24px; color: var(--nawar-dark); }
+.funnel-step .name { font-size: 13.5px; color: var(--ink); font-weight: 600; }
+.funnel-step .pct { font-size: 12.5px; color: var(--muted); }
+.funnel-arrow { text-align: center; color: var(--muted); font-size: 12px; }
+
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; align-items: start; }
+
 .topbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
 .logout { font-size: 13px; color: var(--muted); background: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: var(--radius); cursor: pointer; }
 .logout:hover { color: var(--ink); }
